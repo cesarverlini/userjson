@@ -21,11 +21,14 @@ class Users extends CI_Controller
 	public function save_user()
 	{		
 		$user = $_POST['user'];
-		$password = $_POST['password'];		
+		$password = base64_encode($_POST['password']);		
+		$decode = base64_decode($password);
+
 
 		$data = array(
 			'insta_username' => $user,
-			'insta_password' => sha1($password),
+			'insta_password' => $password,
+			// 'password_decode' => $decode,
 		);
 
 		$json_string = json_encode($data);
